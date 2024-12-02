@@ -16,12 +16,14 @@ if __name__ == '__main__':
         for j in range(0, innerLen-1):
             if failedNum > 1:
                 break
-            opsign = 1 if matrix[i][j] - matrix[i][j+1] >=0 else -1
+
+            cacheOp = abs(matrix[i][j] - matrix[i][j + 1])
+            opsign = 1 if cacheOp >=0 else -1
             if sign != opsign:
                 failedNum += 1
                 continue
 
-            if abs(matrix[i][j] - matrix[i][j+1]) > 3 or abs(matrix[i][j] - matrix[i][j+1]) < 1:
+            if cacheOp > 3 or cacheOp < 1:
                 failedNum += 1
                 continue
 
