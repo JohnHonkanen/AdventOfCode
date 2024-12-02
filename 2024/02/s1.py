@@ -10,10 +10,6 @@ if __name__ == '__main__':
     ans = 0
     for i in range(0, len(matrix)):
         innerLen = len(matrix[i])
-        # if abs(matrix[i][0] - matrix[i][innerLen - 1]) > innerLen*3+1:
-        #     print(matrix[i])
-        #     continue
-
 
         sign = 1 if matrix[i][0] - matrix[i][1] >=0 else -1
         passed = True

@@ -7,6 +7,7 @@
 
 if __name__ == '__main__':
     matrix = read_input('input.txt')
+    matrix = [[8, 9, 8, 7, 6, 5, 4, 3, 2, 1]]
     ans = 0
     for i in range(0, len(matrix)):
         innerLen = len(matrix[i])
@@ -21,6 +22,8 @@ if __name__ == '__main__':
             opsign = 1 if cacheOp >=0 else -1
             if sign != opsign:
                 failedNum += 1
+                if j == 0:
+                    sign = 1 if matrix[i][1] - matrix[i][2] >=0 else -1
                 continue
 
             if cacheOp > 3 or cacheOp < 1:
