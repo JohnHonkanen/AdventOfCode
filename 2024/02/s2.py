@@ -5,33 +5,40 @@
             ret_matrix.append(list(map(int, line.split())))
     return ret_matrix
 
+def is_safe(x,y):
+    opsign = -1 if x - y >= 0 else 1
+    if abs(x - y) > 3 or abs(x - y) < 1:
+        return False, opsign
+    return True, opsign
+
 if __name__ == '__main__':
     matrix = read_input('input.txt')
-    matrix = [[8, 9, 8, 7, 6, 5, 4, 3, 2, 1]]
+    matrix =[[9,1,8,7,6,5,4], [8,9,8,7,6,5,4,3,2,1], [3,4,5,6,1,8,9], [1,2,3,4,5,6], [6,5,4,3,2,1], [1,5,3,5,3,2,1]]
+    matrix =[[1,5,3,5,3,2,1]]
+
     ans = 0
     for i in range(0, len(matrix)):
         innerLen = len(matrix[i])
-
-        sign = 1 if matrix[i][0] - matrix[i][1] >=0 else -1
-        failedNum = 0
+        pos = list()
+        neg = list()
+        total_fail = 0
         for j in range(0, innerLen-1):
-            if failedNum > 1:
-                break
+            [safe, sign] = is_safe(matrix[i][j], matrix[i][j+1])
 
-            cacheOp = abs(matrix[i][j] - matrix[i][j + 1])
-            opsign = 1 if cacheOp >=0 else -1
-            if sign != opsign:
-                failedNum += 1
-                if j == 0:
-                    sign = 1 if matrix[i][1] - matrix[i][2] >=0 else -1
-                continue
+            if safe:
+                if sign == 1:
+                    pos.append(j)
+                else:
+                    neg.append(j)
+            else:
+                total_fail += 1
 
-            if cacheOp > 3 or cacheOp < 1:
-                failedNum += 1
-                continue
+        print(total_fail, len(pos), len(neg), innerLen)
 
-        if failedNum < 2:
-            print(matrix[i])
-            ans+=1
+        if total_fail < 3:
+            if len(pos) + total_fail < 3:
+                ans += 1
+            if len(neg) + total_fail < 3:
+                ans += 1
 
     print(ans)
