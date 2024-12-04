@@ -5,7 +5,7 @@ if __name__ == '__main__':
     with open('input.txt', 'r', encoding='utf-8-sig') as f:
         mul_input = f.read()
 
-    pattern = r"mul\(\d+,\d+\)|don'?t\(\)|do\(\)"
+    pattern = r"mul\(\d{1,3},\d{1,3}\)|don't\(\)|do\(\)"
     patternMul = r"mul\((\d+),(\d+)\)"
 
     matches = re.findall(pattern, mul_input)
